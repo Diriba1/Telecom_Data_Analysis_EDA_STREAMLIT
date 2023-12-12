@@ -1,0 +1,1 @@
+psql' -h localhost -d telecomdb -U postgres -f ../data/telecom.sql
