@@ -1,1 +1,5 @@
-psql' -h localhost -d telecomdb -U postgres -f ../data/telecom.sql
+
+# upload the dump telecom.sql data to locally created postgress database 
+
+# use the following command
+# psql' -h localhost -d telecomdb -U postgres -f ../data/telecom.sql

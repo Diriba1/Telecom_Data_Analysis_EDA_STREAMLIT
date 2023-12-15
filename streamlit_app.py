@@ -2,7 +2,7 @@ from StreamlitFiles import DataCleaning, UserOverview, UserEngagement,UserExperi
 
 import streamlit as st
 
-#st.set_page_config(page_title="Telecom Data Analytics", layout="wide") 
+st.set_page_config(page_title="Telecom Data Analytics", layout="wide") 
 
 PAGES = {
     "Data Cleaning": DataCleaning,
