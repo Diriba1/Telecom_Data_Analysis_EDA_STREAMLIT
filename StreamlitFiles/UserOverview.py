@@ -122,10 +122,44 @@ def app():
     correlation_matrix = numeric_df.corr()
 
     # Streamlit app
-    st.title("Correlation Matrix Heatmap in Streamlit")
+    st.write("#### Correlation Matrix Heatmap in Streamlit")
 
     # Plot correlation matrix heatmap
     fig, ax = plt.subplots(figsize=(12, 10))
     sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt='.2f', linewidths=0.5, ax=ax)
     st.write("#### Correlation Matrix Heatmap")
     st.pyplot(fig)
+
+
+    df['Dur. (s)'] = df['Dur. (ms)'] / 1000
+    user_summary = df.groupby('MSISDN/Number').agg({
+        'Dur. (s)': 'sum',
+        'Total DL (Bytes)': 'sum',
+        'Total UL (Bytes)': 'sum'
+    }).reset_index()
+
+    # Compute deciles based on total duration
+    user_summary['Duration Decile'] = pd.qcut(user_summary['Dur. (s)'], q=[0, 0.2, 0.4, 0.6, 0.8, 1], labels=False)
+
+    # Group by decile class and calculate total data for each decile
+    decile_summary = user_summary.groupby('Duration Decile').agg({
+        'Total DL (Bytes)': 'sum',
+        'Total UL (Bytes)': 'sum'
+    }).reset_index()
+
+    # Create Streamlit app
+    st.write('#### Total Data (DL+UL) per Decile Class')
+
+    # Display the decile_summary DataFrame
+    st.write(decile_summary)
+
+    # Create and display the bar plot
+    plt.figure(figsize=(10, 6))
+    sns.barplot(x='Duration Decile', y='Total DL (Bytes)', data=decile_summary, label='DL')
+    sns.barplot(x='Duration Decile', y='Total UL (Bytes)', data=decile_summary, label='UL', color='orange')
+    plt.xlabel('Duration Decile')
+    plt.ylabel('Total Data (Bytes)')
+    plt.title('Total Data (DL+UL) per Decile Class')
+    plt.legend()
+    st.pyplot(plt)  # Display the plot using st.pyplot
+
