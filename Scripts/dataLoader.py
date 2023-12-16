@@ -13,10 +13,10 @@ def load_from_db():
 
 
 
-def clean_data_loader():
+def clean_data_loader(path='C:/Users/Diriba/Desktop/10AC/Week1/Project/TenAcademyWeek1/data/clean_data.csv'):
     # Read your data into a pandas DataFrame
     try:
-        df = pd.read_csv('C:/Users/Diriba/Desktop/10AC/Week1/Project/TenAcademyWeek1/data/clean_data.csv')
+        df = pd.read_csv(path)
         return df
     except BaseException:
         return "file does not exist or path is not correct"  
