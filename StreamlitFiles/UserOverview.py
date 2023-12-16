@@ -115,14 +115,17 @@ def app():
 
     scatter_plot(df)
 
-    # Select numeric columns
-    numeric_df = df.select_dtypes(include=['int64', 'float64'])
+   
 
-    # Compute correlation matrix
-    correlation_matrix = numeric_df.corr()
+    correlation_matrix = df[['Social Media DL (Bytes)','Social Media UL (Bytes)', 
+            'Google DL (Bytes)', 'Google UL (Bytes)',
+            'Email DL (Bytes)', 'Email UL (Bytes)',
+            'Youtube DL (Bytes)','Youtube UL (Bytes)', 
+            'Netflix DL (Bytes)', 'Netflix UL (Bytes)',
+            'Gaming DL (Bytes)', 'Gaming UL (Bytes)', 
+            'Other DL (Bytes)', 'Other UL (Bytes)']].corr()
 
     # Streamlit app
-    st.write("#### Correlation Matrix Heatmap in Streamlit")
 
     # Plot correlation matrix heatmap
     fig, ax = plt.subplots(figsize=(12, 10))
