@@ -1,2 +1,3 @@
-# TenAcademyWeek1
-Ten Academy Tutorials Week 1 Repo
+# Telecom data analysis 
+Telecom data analysis, EDA, Streamlit
+
